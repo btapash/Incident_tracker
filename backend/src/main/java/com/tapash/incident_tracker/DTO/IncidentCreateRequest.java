@@ -1,7 +1,9 @@
 package com.tapash.incident_tracker.DTO;
 
 import jakarta.validation.constraints.*;
+import lombok.Data;
 
+@Data
 public class IncidentCreateRequest {
 
     @NotBlank(message = "Title is required")

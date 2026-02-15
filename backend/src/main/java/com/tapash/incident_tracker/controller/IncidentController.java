@@ -9,7 +9,9 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/incidents")
 public class IncidentController {
@@ -24,8 +26,14 @@ public class IncidentController {
     public ResponseEntity<IncidentResponse> create(
             @Valid @RequestBody IncidentCreateRequest req) {
 
+        log.info("Received request to create incident: title={}, service={}",
+                req.getTitle(), req.getService());
+        IncidentResponse response = IncidentMapper.toResponse(service.create(req));
+
+        log.info("Incident created successfully with id={}", response.getId());
+
         return ResponseEntity.status(201)
-                .body(IncidentMapper.toResponse(service.create(req)));
+                .body(response);
     }
 
     @GetMapping
@@ -39,11 +47,16 @@ public class IncidentController {
             @RequestParam(defaultValue = "createdAt") String sortBy,
             @RequestParam(defaultValue = "desc") String direction
     ) {
+        log.debug("Fetching incidents: page={}, size={}, status={}, service={}, severity={}, search={}, sortBy={}, direction={}",
+                page, size, status, serviceName, severity, search, sortBy, direction);
+
 
         Page<IncidentResponse> res = service.getAll(
                 page, size, status, serviceName, severity, search, sortBy, direction
         ).map(IncidentMapper::toResponse);
 
+        log.info("Fetched {} incidents (page {} of {})",
+                res.getNumberOfElements(), res.getNumber() + 1, res.getTotalPages());
         return ResponseEntity.ok(res);
     }
 
@@ -60,8 +73,15 @@ public class IncidentController {
             @PathVariable Long id,
             @Valid @RequestBody IncidentUpdateRequest req) {
 
-        return ResponseEntity.ok(
-                IncidentMapper.toResponse(service.update(id, req))
-        );
+
+        log.info("Updating incident id={} with status={}, severity={}",
+                id, req.getStatus(), req.getSeverity());
+
+        IncidentResponse response =
+                IncidentMapper.toResponse(service.update(id, req));
+
+        log.info("Incident updated successfully id={}", id);
+
+        return ResponseEntity.ok(response);
     }
 }

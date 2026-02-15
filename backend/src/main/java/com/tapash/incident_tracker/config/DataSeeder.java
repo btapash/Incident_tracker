@@ -19,23 +19,23 @@ public class DataSeeder implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        // prevent duplicate seeding
-//        if (repo.count() > 0) return;
-//
-//        for (int i = 1; i <= 200; i++) {
-//
-//            Incident inc = new Incident();
-//            inc.setTitle("Incident " + i);
-//            inc.setService(i % 2 == 0 ? "Payments" : "Auth");
-//            inc.setSeverity(Severity.values()[i % 4]);
-//            inc.setStatus(Status.values()[i % 3]);
-//            inc.setOwner("User " + i);
-//            inc.setSummary("Auto-generated incident " + i);
-//
-//            repo.save(inc);
-//        }
+//         prevent duplicate seeding
+        if (repo.count() > 0) return;
 
-        System.out.println("✅ Seeded 200 incidents");
+        for (int i = 1; i <= 200; i++) {
+
+            Incident inc = new Incident();
+            inc.setTitle("Incident " + i);
+            inc.setService(i % 2 == 0 ? "Payments" : "Auth");
+            inc.setSeverity(Severity.values()[i % 4]);
+            inc.setStatus(Status.values()[i % 3]);
+            inc.setOwner("User " + i);
+            inc.setSummary("Auto-generated incident " + i);
+
+            repo.save(inc);
+        }
+
+        System.out.println(" Seeded 200 incidents");
     }
 }
 

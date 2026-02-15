@@ -1,7 +1,10 @@
 package com.tapash.incident_tracker.DTO;
 
+import lombok.Data;
+
 import java.time.LocalDateTime;
 
+@Data
 public class IncidentResponse {
 
     public Long id;

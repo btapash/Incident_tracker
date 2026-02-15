@@ -1,5 +1,8 @@
 package com.tapash.incident_tracker.DTO;
 
+import lombok.Data;
+
+@Data
 public class IncidentUpdateRequest {
 
     public String owner;
