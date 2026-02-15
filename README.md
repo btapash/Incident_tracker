@@ -100,6 +100,7 @@ UX Decisions
 4. Clickable rows for quick navigation
 
 ###Improvements
+
 #Backend
 1. Add authentication & authorization (JWT)
 2. Add global exception handling with standardized responses
@@ -107,12 +108,14 @@ UX Decisions
 4. Add unit & integration tests
 
 #Frontend
+
 1. Add loading skeletons for better UX
 2. Add sorting indicators
 3. Add "No results found" UI
 4. Add page size selector (5 / 10 / 20)
 
 #Devops
+
 Deploy on cloud like AWS or Vercel
 
 
