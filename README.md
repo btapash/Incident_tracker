@@ -40,6 +40,8 @@ spring:
       ddl-auto: create
     show-sql: true
 
+  Also create incident_db database in you postgresql local
+  
 3. Run the application
 mvn spring-boot:run
 
